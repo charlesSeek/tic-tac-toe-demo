@@ -6,29 +6,19 @@ import TweenMax from 'gsap'
 
 import rand_arr_elem from '../../helpers/rand_arr_elem'
 import rand_to_fro from '../../helpers/rand_to_fro'
+import { WIN_SET, CELL_INIT_VALS } from '../../helpers/constant'
 
 export default class SetName extends Component {
 
 	constructor (props) {
 		super(props)
 
-		this.win_sets = [
-			['c1', 'c2', 'c3'],
-			['c4', 'c5', 'c6'],
-			['c7', 'c8', 'c9'],
-
-			['c1', 'c4', 'c7'],
-			['c2', 'c5', 'c8'],
-			['c3', 'c6', 'c9'],
-
-			['c1', 'c5', 'c9'],
-			['c3', 'c5', 'c7']
-		]
+		this.win_sets = WIN_SET;
 
 
 		if (this.props.game_type != 'live')
 			this.state = {
-				cell_vals: {},
+				cell_vals: CELL_INIT_VALS,
 				next_turn_ply: true,
 				game_play: true,
 				game_stat: 'Start game'
@@ -37,7 +27,7 @@ export default class SetName extends Component {
 			this.sock_start()
 
 			this.state = {
-				cell_vals: {},
+				cell_vals: CELL_INIT_VALS,
 				next_turn_ply: true,
 				game_play: false,
 				game_stat: 'Connecting'
