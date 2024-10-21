@@ -297,30 +297,29 @@ export default class SetName extends Component {
 			})
 
 			this.socket && this.socket.disconnect();
-		} else {
-			if (!winner) {
-				this.props.game_type!='live' && this.state.next_turn_ply && setTimeout(this.turn_comp.bind(this), rand_to_fro(500, 1000));
-	
-				this.setState({
-					next_turn_ply: !this.state.next_turn_ply
-				})
-			} else {
-				this.refs[set[0]].classList.add('win')
-				this.refs[set[1]].classList.add('win')
-				this.refs[set[2]].classList.add('win')
+			return;
+		} 
+		if (!winner) {
+			this.props.game_type!='live' && this.state.next_turn_ply && setTimeout(this.turn_comp.bind(this), rand_to_fro(500, 1000));
 
-				TweenMax.killAll(true)
-				TweenMax.from('td.win', 1, {opacity: 0, ease: Linear.easeIn})
+			this.setState({
+				next_turn_ply: !this.state.next_turn_ply
+			})
+			return;
+		} 
+		this.refs[set[0]].classList.add('win')
+		this.refs[set[1]].classList.add('win')
+		this.refs[set[2]].classList.add('win')
 
-				this.setState({
-					game_stat: (winner === 'x'?'You':'Opponent')+' win',
-					game_play: false
-				})
+		TweenMax.killAll(true)
+		TweenMax.from('td.win', 1, {opacity: 0, ease: Linear.easeIn})
 
-				this.socket && this.socket.disconnect();
+		this.setState({
+			game_stat: (winner === 'x'?'You':'Opponent')+' win',
+			game_play: false
+		})
 
-			}
-		}
+		this.socket && this.socket.disconnect();
 
 		// for (let i=1; i<=9; i++) 
 		// 	!cell_vals['c'+i] && (fin = false)
